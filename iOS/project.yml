@@ -1,0 +1,75 @@
+name: AtticInventory
+options:
+  bundleIdPrefix: com.shimondeitel.atticinventory
+  deploymentTarget:
+    iOS: "17.0"
+  createIntermediateGroups: true
+  groupSortPosition: top
+settings:
+  base:
+    MARKETING_VERSION: "1.0"
+    CURRENT_PROJECT_VERSION: "1"
+    SWIFT_VERSION: "5.0"
+    DEVELOPMENT_TEAM: "W7Q885Q59C"
+    CODE_SIGN_STYLE: Automatic
+    IPHONEOS_DEPLOYMENT_TARGET: "17.0"
+    TARGETED_DEVICE_FAMILY: "1"
+    ENABLE_USER_SCRIPT_SANDBOXING: "YES"
+targets:
+  AtticInventory:
+    type: application
+    platform: iOS
+    sources:
+      - path: AtticInventory
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.shimondeitel.atticinventory
+        TARGETED_DEVICE_FAMILY: "1"
+        INFOPLIST_FILE: AtticInventory/Info.plist
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+        ENABLE_PREVIEWS: "YES"
+        GENERATE_INFOPLIST_FILE: "NO"
+  AtticInventoryTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - path: AtticInventoryTests
+      - path: AtticInventory.storekit
+    dependencies:
+      - target: AtticInventory
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.shimondeitel.atticinventory.tests
+        GENERATE_INFOPLIST_FILE: "YES"
+        TARGETED_DEVICE_FAMILY: "1"
+  AtticInventoryUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources:
+      - path: AtticInventoryUITests
+    dependencies:
+      - target: AtticInventory
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.shimondeitel.atticinventory.uitests
+        GENERATE_INFOPLIST_FILE: "YES"
+        TARGETED_DEVICE_FAMILY: "1"
+schemes:
+  AtticInventory:
+    build:
+      targets:
+        AtticInventory: all
+        AtticInventoryTests: [test]
+        AtticInventoryUITests: [test]
+    run:
+      config: Debug
+      storeKitConfiguration: AtticInventory.storekit
+    test:
+      config: Debug
+      storeKitConfiguration: AtticInventory.storekit
+      targets:
+        - AtticInventoryTests
+        - AtticInventoryUITests
+    archive:
+      config: Release
